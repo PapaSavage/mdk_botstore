@@ -15,29 +15,36 @@
                 </div>
                 <div class=" mt-6 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
                     <div v-if="filteredProducts.length !== 0" v-for="product in filteredProducts" :key="product.id"
-                        class="group relative">
+                        class="group relative bg-pale-sky-200 dark:bg-pale-sky-800 p-3 rounded-md">
                         <a href="" class="animate__animated animate__fadeIn" @click.prevent="openModal(product)">
-                            <div
-                                class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
-                                <img :src="'data:image/png;base64,' + product.images" class="" />
-                            </div>
-                            <div class="mt-4 flex justify-between">
-                                <div>
-                                    <h3 class="text-md font-bold ">
-                                        <span aria-hidden="true" class="absolute inset-0" />
-                                        {{ product.title }}
-                                    </h3>
-                                </div>
-                                <p class="text-md font-medium">${{ product.price }}</p>
-                            </div>
+                            <carditem :imagesrc="'data:image/png;base64,' + product.images" :title="product.title"
+                                :price="product.price" />
+
                         </a>
+                        <div class="flex flex-row-reverse pt-1 animate__animated animate__fadeIn">
+                            <button v-if="!product.quantity" @click="product.quantity = 1;"
+                                class="w-full middle none center rounded-full bg-white font-mono font-bold uppercase shadow-md shadow-pale-sky-500/20 transition-all duration-200 hover:shadow-lg active:bg-pale-sky-900 active:text-pale-sky-400 text-black text-3xl">+</button>
+                            <div v-else
+                                class="w-full middle none center rounded-full bg-white py-1 font-mono text-xs font-bold uppercase text-white shadow-md shadow-pale-sky-500/20 transition-all hover:shadow-lg">
+                                <div class="flex flex-row justify-between px-2">
+                                    <button @click="product.quantity--"
+                                        class="w-8 text-black bg-white text-2xl rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out">-</button>
+                                    <label
+                                        class="block font-medium text-gray-900 my-auto text-xl animate__animated animate__fadeIn"
+                                        for="quantity">{{ product.quantity }}</label>
+                                    <button @click="product.quantity++"
+                                        class="w-8 text-black bg-white text-2xl rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out">+</button>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="animate__animated animate__fadeIn" v-else>Нет данных</div>
                 </div>
             </div>
-            <div v-if="selectedProduct" class="fixed z-10 inset-0 overflow-y-auto">
+            <div v-if="selectedProduct" class="fixed z-10 inset-0 overflow-y-auto animate__animated animate__fadeIn">
                 <div
-                    class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 animate__animated animate__fadeIn">
+                    class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 animate__animated animate__fadeIn ">
                     <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
@@ -89,11 +96,15 @@
             </div>
         </div>
     </div>
+
+    <h1 class="text-center text-3xl font-bold">Корзина товаров</h1>
+
 </template>
 
 <script setup lang="ts">
 import { API } from '~/plugins/axios.js';
 import { ref } from 'vue';
+import carditem from '../components/carditem.vue';
 
 definePageMeta({
     layout: "default",
@@ -117,6 +128,7 @@ interface Product_modal {
     price: number;
     category: number;
     images: string;
+    quantity: number;
 }
 
 interface Product {
@@ -127,6 +139,7 @@ interface Product {
         price: number;
         category: number;
         images: string;
+        quantity: number;
     }[];
 }
 
@@ -200,7 +213,23 @@ function closeModal() {
     selectedProduct.value = null;
 }
 
+function addProductToCart() {
+    toast.add({
+        title: "Товар успешно добавлен.",
+        timeout: 1000,
+        callback: () => {
+        },
+    });
+    // get_data();
+}
+
 get_data();
 
 
 </script>
+
+<style>
+body {
+    font-family: 'Golos Text'
+}
+</style>
