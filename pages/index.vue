@@ -22,17 +22,17 @@
 
                         </a>
                         <div class="flex flex-row-reverse pt-1 animate__animated animate__fadeIn">
-                            <button v-if="!product.quantity" @click="product.quantity = 1;"
+                            <button v-if="!product.quantity" @click="product.quantity = 1; addToCart(product);"
                                 class="w-full middle none center rounded-full bg-white font-mono font-bold uppercase shadow-md shadow-pale-sky-500/20 transition-all duration-200 hover:shadow-lg active:bg-pale-sky-900 active:text-pale-sky-400 text-black text-3xl">+</button>
                             <div v-else
                                 class="w-full middle none center rounded-full bg-white py-1 font-mono text-xs font-bold uppercase text-white shadow-md shadow-pale-sky-500/20 transition-all hover:shadow-lg">
                                 <div class="flex flex-row justify-between px-2">
-                                    <button @click="product.quantity--"
+                                    <button @click="product.quantity--; updateQuantityGood(product)"
                                         class="w-8 text-black bg-white text-2xl rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out">-</button>
                                     <label
                                         class="block font-medium text-gray-900 my-auto text-xl animate__animated animate__fadeIn"
                                         for="quantity">{{ product.quantity }}</label>
-                                    <button @click="product.quantity++"
+                                    <button @click="product.quantity++; updateQuantityGood(product)"
                                         class="w-8 text-black bg-white text-2xl rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out">+</button>
 
                                 </div>
@@ -98,6 +98,7 @@
     </div>
 
     <h1 class="text-center text-3xl font-bold">Корзина товаров</h1>
+    <div>{{ cartStore.items }}</div>
 
 </template>
 
@@ -105,22 +106,14 @@
 import { API } from '~/plugins/axios.js';
 import { ref } from 'vue';
 import carditem from '../components/carditem.vue';
+import { useCartStore } from '~/stores/cart';
+import { storeToRefs } from 'pinia';
 
 definePageMeta({
     layout: "default",
 });
 
 useHead({ title: "Store" });
-
-
-const selectedCategory = ref(0);
-
-const loading = ref(true);
-const filteredProducts = ref<Product['results']>([]);
-const selectedProduct = ref<Product_modal | null>(null);
-
-const toast = useToast();
-
 
 interface Product_modal {
     id: number;
@@ -150,6 +143,16 @@ interface Category {
         title: string;
     }[];
 }
+
+const cartStore = useCartStore();
+const { items: cartItems, totalItems, totalPrice } = storeToRefs(cartStore);
+const selectedCategory = ref(0);
+
+const loading = ref(true);
+const filteredProducts = ref<Product['results']>([]);
+const selectedProduct = ref<Product_modal | null>(null);
+
+const toast = useToast();
 
 const products = ref<Product>({
     count: 0,
@@ -221,6 +224,19 @@ function addProductToCart() {
         },
     });
     // get_data();
+}
+
+function addToCart(product: Product_modal) {
+    cartStore.addItem({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        quantity: product.quantity,
+    });
+}
+
+function updateQuantityGood(product: Product_modal) {
+    cartStore.updateItemQuantity(product.id, product.quantity);
 }
 
 get_data();
