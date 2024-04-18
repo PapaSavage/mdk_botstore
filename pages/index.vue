@@ -5,15 +5,20 @@
                 <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
             </div>
             <div v-else>
-                <div class="flex flex-wrap">
-                    <button v-if="categories.count > 0" v-for="category in categories.results" :key="category.id"
-                        @click="selectedCategory = category.id"
-                        class="text-center bg-transparent hover:bg-pale-sky-400 my-auto shadow-lg dark:shadow-neutral-700/50 text-black-700 font-semibold p-1 border-2 border-pale-sky-900 dark:border-neutral-400 hover:dark:bg-neutral-800 rounded-lg animate__animated hovanimate__swing ml-3 mb-3"
-                        :class="{ 'bg-neutral-300 dark:bg-pale-sky-600': category.id === selectedCategory }">
-                        {{ category.title }}
-                    </button>
+                <div class="">
+                    <div
+                        class="mt-2 pt-4 absolute top-0 left-0 w-full z-10 bg-pale-sky-100 dark:bg-pale-sky-800 rounded-full shadow-lg shadow-pale-sky-500/20">
+                        <div class="flex flex-wrap">
+                            <button v-if="categories.count > 0" v-for="category in categories.results"
+                                :key="category.id" @click="selectedCategory = category.id"
+                                class="text-center bg-transparent hover:bg-pale-sky-200 my-auto shadow-lg dark:shadow-neutral-700/50 text-black-700 font-semibold p-1 border-2 border-pale-sky-900 dark:border-neutral-400 hover:dark:bg-neutral-500 rounded-lg animate__animated hovanimate__swing ml-3 mb-3"
+                                :class="{ 'bg-neutral-400 dark:bg-pale-sky-600': category.id === selectedCategory }">
+                                {{ category.title }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class=" mt-6 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                <div class="mt-16 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-16">
                     <div v-if="filteredProducts.length !== 0" v-for="product in filteredProducts" :key="product.id"
                         class="group relative bg-pale-sky-200 dark:bg-pale-sky-800 p-3 rounded-md">
                         <a href="" class="animate__animated animate__fadeIn" @click.prevent="openModal(product)">
@@ -23,17 +28,17 @@
                         </a>
                         <div class="flex flex-row-reverse pt-1 animate__animated animate__fadeIn">
                             <button v-if="!product.quantity" @click="product.quantity = 1; addToCart(product);"
-                                class="w-full middle none center rounded-full bg-white font-mono font-bold uppercase shadow-md shadow-pale-sky-500/20 transition-all duration-200 hover:shadow-lg active:bg-pale-sky-900 active:text-pale-sky-400 text-black text-3xl">+</button>
+                                class="mt-2 py-1 w-full middle none center rounded-full bg-white font-mono font-bold uppercase shadow-md shadow-pale-sky-500/20 transition-all duration-200 hover:shadow-lg active:bg-pale-sky-900 active:text-pale-sky-400 text-black text-2xl">+</button>
                             <div v-else
-                                class="w-full middle none center rounded-full bg-white py-1 font-mono text-xs font-bold uppercase text-white shadow-md shadow-pale-sky-500/20 transition-all hover:shadow-lg">
+                                class="mt-2 w-full middle none center rounded-full bg-white font-mono text-xs font-bold uppercase text-white shadow-md shadow-pale-sky-500/20 transition-all hover:shadow-lg">
                                 <div class="flex flex-row justify-between px-2">
                                     <button @click="product.quantity--; updateQuantityGood(product)"
-                                        class="w-8 text-black bg-white text-2xl rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out">-</button>
+                                        class="w-8 text-black bg-white text-2xl my-1 rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out">-</button>
                                     <label
                                         class="block font-medium text-gray-900 my-auto text-xl animate__animated animate__fadeIn"
                                         for="quantity">{{ product.quantity }}</label>
                                     <button @click="product.quantity++; updateQuantityGood(product)"
-                                        class="w-8 text-black bg-white text-2xl rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out">+</button>
+                                        class="w-8 text-black bg-white text-2xl my-1 rounded-full hover:bg-black hover:text-white transition-all duration-300 ease-in-out">+</button>
 
                                 </div>
                             </div>
@@ -63,7 +68,6 @@
                                         <input disabled type="text" id="title" v-model="selectedProduct.title"
                                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     </div>
-
                                     <div class="mb-4">
                                         <label for="category"
                                             class="block text-sm font-medium text-gray-700">Категория</label>
@@ -82,10 +86,10 @@
                             </div>
                         </div>
                         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                            <button type="button" @click=""
+                            <!-- <button type="button" @click=""
                                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 sm:ml-3 sm:w-auto sm:text-sm ">
                                 Добавить
-                            </button>
+                            </button> -->
                             <button type="button" @click="closeModal"
                                 class="my-3 md:my-0 lg:my-0 xl:my-0 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                 Отмена
@@ -97,8 +101,23 @@
         </div>
     </div>
 
-    <h1 class="text-center text-3xl font-bold">Корзина товаров</h1>
-    <div>{{ cartStore.items }}</div>
+    <div class="fixed bottom-0 left-0 w-full p-4">
+        <button @click=""
+            class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
+            :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
+            <div class="flex flex-row justify-between">
+                <div>40min</div>
+                <div>Заказ</div>
+                <div>{{ totalPrice }}руб</div>
+            </div>
+        </button>
+    </div>
+
+    <!-- <div>{{ cartItems.length }}</div> -->
+
+    <!-- <div v-if="cartItems.length > 0">
+        <button class="fixed bottom-10 right-10" @click="clearCart">Очистить корзину</button>
+    </div> -->
 
 </template>
 
@@ -235,6 +254,13 @@ function addToCart(product: Product_modal) {
     });
 }
 
+function clearCart() {
+    cartStore.clearCart();
+    for (let i = 0; i < products.value.count; i++) {
+        products.value.results[i].quantity = 0;
+    }
+}
+
 function updateQuantityGood(product: Product_modal) {
     cartStore.updateItemQuantity(product.id, product.quantity);
 }
@@ -247,5 +273,15 @@ get_data();
 <style>
 body {
     font-family: 'Golos Text'
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
 }
 </style>

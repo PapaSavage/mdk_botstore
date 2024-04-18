@@ -3,7 +3,7 @@
 
 export default defineNuxtConfig({
     devtools: { enabled: false },
-    modules: ["@nuxt/ui", "@nuxtjs/google-fonts"],
+    modules: ["@nuxt/ui", "@nuxtjs/google-fonts", "@pinia/nuxt"],
     plugins: ["~/plugins/axios.js"],
     css: ["animate.css", "~/assets/css/tailwind.css", "~/assets/css/style.css"],
     colorMode: {
