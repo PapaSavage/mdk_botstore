@@ -46,6 +46,140 @@
                     </div>
                     <div class="animate__animated animate__fadeIn" v-else>Нет данных</div>
                 </div>
+                <div class="fixed bottom-0 left-0 w-full p-4">
+                    <button @click="openOrderModal"
+                        class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
+                        :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
+                        <div class="flex flex-row justify-between">
+                            <div>40min</div>
+                            <div>Заказ</div>
+                            <div>{{ totalPrice }}руб</div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="m-2 fixed z-50 inset-0 overflow-y-autobg-opacity-75 transition duration-200 animate__animated"
+                    :class="{ 'animate__fadeInUp': isopenOrderModal, 'animate__fadeOutDown': isopenOrderModal !== true }">
+                    <div class="relative bg-white rounded-lg h-full w-full mx-auto">
+                        <!-- Здесь размещается содержимое вашего модального окна заказа -->
+                        <button @click="isopenOrderModal = false"
+                            class="absolute top-0 left-0 p-5 text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
+
+                        <h3 class="text-center text-xl font-semibold mb-4 pt-4">Оформление заказа</h3>
+
+                        <div class="px-8 h-full">
+                            <div class="h-full y-overflow-auto">
+                                <ul>
+                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
+                                        <div class="flex items-center">
+                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
+                                                class="w-20 h-20 object-cover mr-4">
+                                            <div class="flex-grow">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
+                                                        }}</span>
+                                                    <div class="flex items-center">
+                                                        <input type="number" v-model.number="product.quantity" min="1"
+                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                        <span class="ml-2">шт.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
+                                        <div class="flex items-center">
+                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
+                                                class="w-20 h-20 object-cover mr-4">
+                                            <div class="flex-grow">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
+                                                        }}</span>
+                                                    <div class="flex items-center">
+                                                        <input type="number" v-model.number="product.quantity" min="1"
+                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                        <span class="ml-2">шт.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
+                                        <div class="flex items-center">
+                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
+                                                class="w-20 h-20 object-cover mr-4">
+                                            <div class="flex-grow">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
+                                                        }}</span>
+                                                    <div class="flex items-center">
+                                                        <input type="number" v-model.number="product.quantity" min="1"
+                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                        <span class="ml-2">шт.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
+                                        <div class="flex items-center">
+                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
+                                                class="w-20 h-20 object-cover mr-4">
+                                            <div class="flex-grow">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
+                                                        }}</span>
+                                                    <div class="flex items-center">
+                                                        <input type="number" v-model.number="product.quantity" min="1"
+                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                        <span class="ml-2">шт.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
+                                        <div class="flex items-center">
+                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
+                                                class="w-20 h-20 object-cover mr-4">
+                                            <div class="flex-grow">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
+                                                        }}</span>
+                                                    <div class="flex items-center">
+                                                        <input type="number" v-model.number="product.quantity" min="1"
+                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                        <span class="ml-2">шт.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
             <div v-if="selectedProduct" class="fixed z-10 inset-0 overflow-y-auto animate__animated animate__fadeIn">
                 <div
@@ -101,23 +235,7 @@
         </div>
     </div>
 
-    <div class="fixed bottom-0 left-0 w-full p-4">
-        <button @click=""
-            class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
-            :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
-            <div class="flex flex-row justify-between">
-                <div>40min</div>
-                <div>Заказ</div>
-                <div>{{ totalPrice }}руб</div>
-            </div>
-        </button>
-    </div>
 
-    <!-- <div>{{ cartItems.length }}</div> -->
-
-    <!-- <div v-if="cartItems.length > 0">
-        <button class="fixed bottom-10 right-10" @click="clearCart">Очистить корзину</button>
-    </div> -->
 
 </template>
 
@@ -170,6 +288,8 @@ const selectedCategory = ref(0);
 const loading = ref(true);
 const filteredProducts = ref<Product['results']>([]);
 const selectedProduct = ref<Product_modal | null>(null);
+
+const isopenOrderModal = ref(false);
 
 const toast = useToast();
 
@@ -251,6 +371,7 @@ function addToCart(product: Product_modal) {
         title: product.title,
         price: product.price,
         quantity: product.quantity,
+        images: product.images
     });
 }
 
@@ -263,6 +384,10 @@ function clearCart() {
 
 function updateQuantityGood(product: Product_modal) {
     cartStore.updateItemQuantity(product.id, product.quantity);
+}
+
+function openOrderModal() {
+    isopenOrderModal.value = true;
 }
 
 get_data();
