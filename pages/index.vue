@@ -58,7 +58,7 @@
                     </button>
                 </div>
 
-                <div class="m-2 fixed z-50 inset-0 overflow-y-autobg-opacity-75 transition duration-200 animate__animated"
+                <div class="m-2 fixed z-50 inset-0 transition duration-200 animate__animated"
                     :class="{ 'animate__fadeInUp': isopenOrderModal, 'animate__fadeOutDown': isopenOrderModal !== true }">
                     <div class="relative bg-white rounded-lg h-full w-full mx-auto">
                         <!-- Здесь размещается содержимое вашего модального окна заказа -->
@@ -75,104 +75,39 @@
                         <h3 class="text-center text-xl font-semibold mb-4 pt-4">Оформление заказа</h3>
 
                         <div class="px-8 h-full">
-                            <div class="h-full y-overflow-auto">
-                                <ul>
-                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
+                            <div class="">
+                                <ul class="max-h-screen overflow-y-auto">
+                                    <li v-for="(product, index) in cartItems" :key="product.id" class="">
                                         <div class="flex items-center">
                                             <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
                                                 class="w-20 h-20 object-cover mr-4">
                                             <div class="flex-grow">
                                                 <div class="flex justify-between items-center">
                                                     <span class="text-lg font-semibold text-centerx">{{ product.title
-                                                        }}</span>
-                                                    <div class="flex items-center">
-                                                        <input type="number" v-model.number="product.quantity" min="1"
-                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                        <span class="ml-2">шт.</span>
-                                                    </div>
+                                                        }} <span class="text-yellow-600">{{ product.quantity
+                                                            }}x</span></span>
                                                 </div>
-                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
+                                                <div class="text-right text-lg font-semibold">{{ product.price *
+                product.quantity }}руб.
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
-                                        <div class="flex items-center">
-                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
-                                                class="w-20 h-20 object-cover mr-4">
-                                            <div class="flex-grow">
-                                                <div class="flex justify-between items-center">
-                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
-                                                        }}</span>
-                                                    <div class="flex items-center">
-                                                        <input type="number" v-model.number="product.quantity" min="1"
-                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                        <span class="ml-2">шт.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
-                                        <div class="flex items-center">
-                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
-                                                class="w-20 h-20 object-cover mr-4">
-                                            <div class="flex-grow">
-                                                <div class="flex justify-between items-center">
-                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
-                                                        }}</span>
-                                                    <div class="flex items-center">
-                                                        <input type="number" v-model.number="product.quantity" min="1"
-                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                        <span class="ml-2">шт.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
-                                        <div class="flex items-center">
-                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
-                                                class="w-20 h-20 object-cover mr-4">
-                                            <div class="flex-grow">
-                                                <div class="flex justify-between items-center">
-                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
-                                                        }}</span>
-                                                    <div class="flex items-center">
-                                                        <input type="number" v-model.number="product.quantity" min="1"
-                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                        <span class="ml-2">шт.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li v-for="(product, index) in cartItems" :key="product.id" class="mb-4">
-                                        <div class="flex items-center">
-                                            <img :src="'data:image/png;base64,' + product.images" alt="Product Image"
-                                                class="w-20 h-20 object-cover mr-4">
-                                            <div class="flex-grow">
-                                                <div class="flex justify-between items-center">
-                                                    <span class="text-lg font-semibold text-centerx">{{ product.title
-                                                        }}</span>
-                                                    <div class="flex items-center">
-                                                        <input type="number" v-model.number="product.quantity" min="1"
-                                                            class="w-16 px-2 py-1 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                        <span class="ml-2">шт.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="text-right text-lg font-semibold">{{ product.price }} руб.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+
                                 </ul>
+                                <UDivider type="dashed" />
+                                <div class="text-center">Всего: {{ totalItems }}шт.</div>
+                                <div class="fixed bottom-0 left-0 w-full p-4">
+                                    <button @click="openOrderCredetionalsModal"
+                                        class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
+                                        :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
+                                        <div class="flex flex-row justify-between">
+                                            <div>40min</div>
+                                            <div>Оформить заказ</div>
+                                            <div>{{ totalPrice }}руб</div>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
@@ -180,6 +115,87 @@
 
                     </div>
                 </div>
+
+                <div class="m-2 fixed z-50 inset-0 transition duration-200 animate__animated" :class="{
+                'animate__fadeInRight': isopenOrderCreditionalsModal, 'animate__fadeOutRight': isopenOrderCreditionalsModal !== true
+            }">
+                    <div class="relative bg-white rounded-lg h-full w-full mx-auto">
+                        <!-- Здесь размещается содержимое вашего модального окна заказа -->
+                        <button @click="isopenOrderCreditionalsModal = false"
+                            class="absolute top-0 left-0 p-5 text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
+
+                        <h3 class="text-center text-xl font-semibold mb-4 pt-4">Личные данные</h3>
+
+                        <div class="px-8 h-full">
+                            <div class="">
+                                <div class="mb-4 flex flex-row gap-3">
+                                    <div>
+                                        <label for="" class="block text-sm font-medium text-gray-700">Фамилия</label>
+                                        <input type="text" id="" placeholder="Иванов"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <div>
+                                        <label for="" class="block text-sm font-medium text-gray-700">Имя</label>
+                                        <input type="text" id="" placeholder="Иван"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <div>
+                                        <label for="" class="block text-sm font-medium text-gray-700">Отчество</label>
+                                        <input type="text" id="" placeholder="Иванович"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                    </div>
+                                </div>
+                                <div class="mb-4 flex flex-row gap-3">
+                                    <div>
+                                        <label for="" class="block text-sm font-medium text-gray-700">Электронная
+                                            почта</label>
+                                        <input type="text" id="" placeholder="example@example.com"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <div>
+                                        <label for="" class="block text-sm font-medium text-gray-700">Телефон</label>
+                                        <input type="text" id="ъ" placeholder="+7 (___) ___-__-__"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="" class="block text-sm font-medium text-gray-700">Адрес</label>
+                                    <input type="text" id="" placeholder="ул. Пушкина 4"
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                </div>
+                                <div>
+                                    <label for="" class="block text-sm font-medium text-gray-700">Комментарий</label>
+                                    <textarea placeholder="Оставьте комментарий..."
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"></textarea>
+                                </div>
+
+
+                                <div class="fixed bottom-0 left-0 w-full p-4">
+                                    <button @click="openOrderCredetionalsModal"
+                                        class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
+                                        :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
+                                        <div class="flex flex-row justify-between">
+                                            <div>40min</div>
+                                            <div>Оформить заказ</div>
+                                            <div>{{ totalPrice }}руб</div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
             </div>
             <div v-if="selectedProduct" class="fixed z-10 inset-0 overflow-y-auto animate__animated animate__fadeIn">
                 <div
@@ -193,7 +209,7 @@
                         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <div class="sm:flex sm:items-center">
                                 <div class="mt-3 sm:mt-0 sm:w-1/2 flex justify-center items-center">
-                                    <img :src="'data:image/png;base64,' + selectedProduct.images" class="w-full" />
+                                    <img :src="'data:image/png;base64,' + selectedProduct.images" class="h-96" />
                                 </div>
                                 <div class="mt-3 sm:mt-0 sm:ml-6 sm:w-1/2">
                                     <div class="mb-4">
@@ -207,8 +223,10 @@
                                             class="block text-sm font-medium text-gray-700">Категория</label>
                                         <select disabled id="category" v-model="selectedProduct.category"
                                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                            <option v-for="category in categories.results" :key="category.id"
-                                                :value="category.id">{{ category.title }}</option>
+                                            <option
+                                                v-for="         category          in          categories.results         "
+                                                :key="category.id" :value="category.id">{{ category.title }}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="mb-4">
@@ -290,6 +308,7 @@ const filteredProducts = ref<Product['results']>([]);
 const selectedProduct = ref<Product_modal | null>(null);
 
 const isopenOrderModal = ref(false);
+const isopenOrderCreditionalsModal = ref(false);
 
 const toast = useToast();
 
@@ -388,6 +407,9 @@ function updateQuantityGood(product: Product_modal) {
 
 function openOrderModal() {
     isopenOrderModal.value = true;
+}
+function openOrderCredetionalsModal() {
+    isopenOrderCreditionalsModal.value = true;
 }
 
 get_data();
