@@ -103,7 +103,7 @@
                                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
                                         <div class="flex flex-row justify-between">
                                             <div>40min</div>
-                                            <div>Оформить заказ</div>
+                                            <div>Ввести личные данные</div>
                                             <div>{{ totalPrice }}руб</div>
                                         </div>
                                     </button>
@@ -139,17 +139,30 @@
                                     <div>
                                         <label for="" class="block text-sm font-medium text-gray-700">Фамилия</label>
                                         <input type="text" id="" placeholder="Иванов"
-                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                            v-model="customer_order.customer_surname" class=" mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2
+                                            px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                                            sm:text-sm transition-all duration-300 ease-in-out"
+                                            :class="{ 'border-red-500': !customer_order.customer_surname }">
+                                        <div v-if="!customer_order.customer_surname" class="text-red-500 text-xs p-1">
+                                            required</div>
                                     </div>
                                     <div>
                                         <label for="" class="block text-sm font-medium text-gray-700">Имя</label>
                                         <input type="text" id="" placeholder="Иван"
-                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                            v-model="customer_order.customer_name"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"
+                                            :class="{ 'border-red-500': !customer_order.customer_name }">
+                                        <div v-if="!customer_order.customer_name" class="text-red-500 text-xs p-1">
+                                            required</div>
                                     </div>
                                     <div>
-                                        <label for="" class="block text-sm font-medium text-gray-700">Отчество</label>
+                                        <label for="" class="block text-sm dfont-medium text-gray-700">Отчество</label>
                                         <input type="text" id="" placeholder="Иванович"
-                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                            v-model="customer_order.customer_lastname"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"
+                                            :class="{ 'border-red-500': !customer_order.customer_lastname }">
+                                        <div v-if="!customer_order.customer_lastname" class="text-red-500 text-xs p-1">
+                                            required</div>
                                     </div>
                                 </div>
                                 <div class="mb-4 flex flex-row gap-3">
@@ -157,28 +170,40 @@
                                         <label for="" class="block text-sm font-medium text-gray-700">Электронная
                                             почта</label>
                                         <input type="text" id="" placeholder="example@example.com"
-                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                            v-model="customer_order.customer_email"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"
+                                            :class="{ 'border-red-500': !customer_order.customer_email }">
+                                        <div v-if="!customer_order.customer_email" class="text-red-500 text-xs p-1">
+                                            required</div>
                                     </div>
                                     <div>
                                         <label for="" class="block text-sm font-medium text-gray-700">Телефон</label>
                                         <input type="text" id="ъ" placeholder="+7 (___) ___-__-__"
-                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                            v-model="customer_order.customer_phone"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"
+                                            :class="{ 'border-red-500': !customer_order.customer_phone }">
+                                        <div v-if="!customer_order.customer_phone" class="text-red-500 text-xs p-1">
+                                            required</div>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <label for="" class="block text-sm font-medium text-gray-700">Адрес</label>
                                     <input type="text" id="" placeholder="ул. Пушкина 4"
-                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out">
+                                        v-model="customer_order.order_address"
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"
+                                        :class="{ 'border-red-500': !customer_order.order_address }">
+                                    <div v-if="!customer_order.order_address" class="text-red-500 text-xs p-1">
+                                        required</div>
                                 </div>
                                 <div>
                                     <label for="" class="block text-sm font-medium text-gray-700">Комментарий</label>
-                                    <textarea placeholder="Оставьте комментарий..."
+                                    <textarea placeholder="Оставьте комментарий..." v-model="customer_order.description"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"></textarea>
                                 </div>
 
 
                                 <div class="fixed bottom-0 left-0 w-full p-4">
-                                    <button @click="openOrderCredetionalsModal"
+                                    <!-- <button @click="createorder"
                                         class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
                                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
                                         <div class="flex flex-row justify-between">
@@ -186,7 +211,8 @@
                                             <div>Оформить заказ</div>
                                             <div>{{ totalPrice }}руб</div>
                                         </div>
-                                    </button>
+                                    </button> -->
+                                    <MainButton text="Open alert" @click="() => showAlert('Hello!')" />
                                 </div>
                             </div>
 
@@ -224,7 +250,7 @@
                                         <select disabled id="category" v-model="selectedProduct.category"
                                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option
-                                                v-for="         category          in          categories.results         "
+                                                v-for="          category           in           categories.results          "
                                                 :key="category.id" :value="category.id">{{ category.title }}
                                             </option>
                                         </select>
@@ -263,6 +289,8 @@ import { ref } from 'vue';
 import carditem from '../components/carditem.vue';
 import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
+import { MainButton, useWebAppPopup } from 'vue-tg'
+import VueTelegram from 'vue-tg';
 
 definePageMeta({
     layout: "default",
@@ -299,12 +327,41 @@ interface Category {
     }[];
 }
 
+interface product_for_order {
+    id: number,
+    quantity: number
+}
+
+interface Order {
+    customer_surname: string;
+    customer_name: string;
+    customer_lastname: string;
+    customer_phone: string;
+    customer_email: string;
+    order_address: string;
+    description: string;
+}
+
+interface CartItem {
+    id: number;
+    quantity: number;
+}
+
 const cartStore = useCartStore();
 const { items: cartItems, totalItems, totalPrice } = storeToRefs(cartStore);
 const selectedCategory = ref(0);
 
 const loading = ref(true);
 const filteredProducts = ref<Product['results']>([]);
+const customer_order = ref<Order>({
+    customer_surname: '',
+    customer_name: '',
+    customer_lastname: '',
+    customer_phone: '',
+    customer_email: '',
+    order_address: '',
+    description: ''
+});
 const selectedProduct = ref<Product_modal | null>(null);
 
 const isopenOrderModal = ref(false);
@@ -321,6 +378,8 @@ const categories = ref<Category>({
     count: 0,
     results: []
 });
+
+const { showAlert } = useWebAppPopup()
 
 function get_data() {
     Promise.all([
@@ -344,6 +403,49 @@ function get_data() {
             console.log(error);
             loading.value = true;
         });
+}
+
+const createorder = async () => {
+    const goodsData = cartItems.value.map((item) => ({
+        id: item.id,
+        quantity: item.quantity
+    }));
+
+    const order = {
+        customer_surname: customer_order.value.customer_surname,
+        customer_name: customer_order.value.customer_name,
+        customer_lastname: customer_order.value.customer_lastname,
+        customer_phone: customer_order.value.customer_phone,
+        customer_email: customer_order.value.customer_email,
+        order_address: customer_order.value.order_address,
+        description: customer_order.value.description,
+        status: "new",
+        goods: goodsData
+    };
+
+    await API.post('orders/', order).then(
+        (response) => {
+            toast.add({
+                title: "Заказ был успешно оформлен.",
+                timeout: 1000,
+                callback: () => {
+                },
+            });
+            get_data();
+        }
+    ).catch((error) => {
+        toast.add({
+            title: "Произошла ошибка. Заказ не был оформлен.",
+            timeout: 1000,
+            callback: () => {
+                get_data();
+            },
+            color: "flamingo",
+            ui: { background: "bg-white dark:bg-neutral-900" },
+        });
+        console.error('Error adding product:', error);
+    });
+
 }
 
 function filterProducts() {
