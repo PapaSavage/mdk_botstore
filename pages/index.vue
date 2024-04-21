@@ -195,12 +195,13 @@
                                     <div v-if="!customer_order.order_address" class="text-red-500 text-xs p-1">
                                         required</div>
                                 </div>
-                                <div>
+                                <div class="mb-4">
                                     <label for="" class="block text-sm font-medium text-gray-700">Комментарий</label>
                                     <textarea placeholder="Оставьте комментарий..." v-model="customer_order.description"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"></textarea>
                                 </div>
-
+                                <URadioGroup color="indigo" v-model="selected" legend="Выберите тип оплаты"
+                                    :options="options" />
 
                                 <div class="fixed bottom-0 left-0 w-full p-4">
                                     <button @click="createorder"
@@ -212,7 +213,6 @@
                                             <div>{{ totalPrice }}руб</div>
                                         </div>
                                     </button>
-                                    <!-- <MainButton text="Open alert" @click="() => showAlert('Hello!')" /> -->
                                 </div>
                             </div>
 
@@ -293,10 +293,17 @@ import { storeToRefs } from 'pinia';
 
 definePageMeta({
     layout: "default",
-    script: ["https://telegram.org/js/telegram-web-app.js"],
 });
 
-useHead({ title: "Store" });
+
+useHead({
+    title: "Store", script: [
+        {
+            src: 'https://telegram.org/js/telegram-web-app.js',
+            defer: true
+        }
+    ]
+});
 
 interface Product_modal {
     id: number;
@@ -362,6 +369,7 @@ const customer_order = ref<Order>({
     order_address: '',
     description: ''
 });
+
 const selectedProduct = ref<Product_modal | null>(null);
 
 const isopenOrderModal = ref(false);
@@ -378,6 +386,16 @@ const categories = ref<Category>({
     count: 0,
     results: []
 });
+
+const options = [{
+    value: 'Банковская карта',
+    label: 'BankCard'
+}, {
+    value: 'Наличными',
+    label: 'Money'
+},]
+
+const selected = ref('Банковская карта')
 
 function get_data() {
     Promise.all([
