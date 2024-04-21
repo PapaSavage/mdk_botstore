@@ -221,6 +221,45 @@
 
                     </div>
                 </div>
+                <div class="m-2 fixed z-50 inset-0 transition duration-200 animate__animated" :class="{
+                'animate__fadeInRight': isopenOrder, 'animate__fadeOutRight': isopenOrder !== true
+            }">
+                    <div class="relative bg-white rounded-lg h-full w-full mx-auto">
+                        <!-- Здесь размещается содержимое вашего модального окна заказа -->
+                        <button @click="isopenOrder = false"
+                            class="absolute top-0 left-0 p-5 text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
+
+                        <h3 class="text-center text-xl font-semibold mb-4 pt-4">Личные данные</h3>
+
+                        <div class="px-8 h-full overflow-y-auto">
+                            <div class=" h-full overflow-y-auto">
+                                <div class="text-center flex justify-center items-center h-full">Ваш номер заказа {{
+                idorder }}</div>
+                                <div class="fixed bottom-0 left-0 w-full p-4">
+                                    <button @click=""
+                                        class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
+                                        :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
+                                        <div class="flex flex-row justify-between">
+                                            <div>40min</div>
+                                            <div>Оформить заказ</div>
+                                            <div>{{ totalPrice }}руб</div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
 
             </div>
             <div v-if="selectedProduct" class="fixed z-10 inset-0 overflow-y-auto animate__animated animate__fadeIn">
@@ -371,9 +410,10 @@ const customer_order = ref<Order>({
 });
 
 const selectedProduct = ref<Product_modal | null>(null);
-
+const idorder = ref(0);
 const isopenOrderModal = ref(false);
 const isopenOrderCreditionalsModal = ref(false);
+const isopenOrder = ref(false);
 
 const toast = useToast();
 
@@ -447,6 +487,8 @@ const createorder = async () => {
                 callback: () => {
                 },
             });
+            idorder.value = response.data;
+            openOrder();
             get_data();
         }
     ).catch((error) => {
@@ -529,6 +571,11 @@ function openOrderModal() {
 function openOrderCredetionalsModal() {
     isopenOrderCreditionalsModal.value = true;
 }
+
+function openOrder() {
+    isopenOrder.value = true;
+}
+
 
 get_data();
 
