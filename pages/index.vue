@@ -203,7 +203,7 @@
 
 
                                 <div class="fixed bottom-0 left-0 w-full p-4">
-                                    <!-- <button @click="createorder"
+                                    <button @click="createorder"
                                         class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
                                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
                                         <div class="flex flex-row justify-between">
@@ -211,8 +211,8 @@
                                             <div>Оформить заказ</div>
                                             <div>{{ totalPrice }}руб</div>
                                         </div>
-                                    </button> -->
-                                    <MainButton text="Open alert" @click="() => showAlert('Hello!')" />
+                                    </button>
+                                    <!-- <MainButton text="Open alert" @click="() => showAlert('Hello!')" /> -->
                                 </div>
                             </div>
 
@@ -289,11 +289,11 @@ import { ref } from 'vue';
 import carditem from '../components/carditem.vue';
 import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
-import { MainButton, useWebAppPopup } from 'vue-tg'
-import VueTelegram from 'vue-tg';
+
 
 definePageMeta({
     layout: "default",
+    script: ["https://telegram.org/js/telegram-web-app.js"],
 });
 
 useHead({ title: "Store" });
@@ -378,8 +378,6 @@ const categories = ref<Category>({
     count: 0,
     results: []
 });
-
-const { showAlert } = useWebAppPopup()
 
 function get_data() {
     Promise.all([
