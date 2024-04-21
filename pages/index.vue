@@ -133,8 +133,8 @@
 
                         <h3 class="text-center text-xl font-semibold mb-4 pt-4">Личные данные</h3>
 
-                        <div class="px-8 h-full">
-                            <div class="">
+                        <div class="px-8 h-full overflow-y-auto">
+                            <div class=" h-full overflow-y-auto">
                                 <div class="mb-4 flex flex-row gap-3">
                                     <div>
                                         <label for="" class="block text-sm font-medium text-gray-700">Фамилия</label>
@@ -202,7 +202,7 @@
                                 </div>
                                 <URadioGroup color="indigo" v-model="selected" legend="Выберите тип оплаты"
                                     :options="options" />
-
+                                <div class="py-20"></div>
                                 <div class="fixed bottom-0 left-0 w-full p-4">
                                     <button @click="createorder"
                                         class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
@@ -388,14 +388,14 @@ const categories = ref<Category>({
 });
 
 const options = [{
-    value: 'Банковская карта',
-    label: 'BankCard'
+    value: 'BankCard',
+    label: 'Банковская карта'
 }, {
-    value: 'Наличными',
-    label: 'Money'
+    value: 'Money',
+    label: 'Наличными'
 },]
 
-const selected = ref('Банковская карта')
+const selected = ref('BankCard')
 
 function get_data() {
     Promise.all([
