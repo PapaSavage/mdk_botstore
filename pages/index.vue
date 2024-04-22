@@ -362,7 +362,8 @@ onMounted(() => {
             if (username) {
                 tg.showAlert(`Добро пожаловать, @${username}.`);
             }
-            userid.value = tg.initDataUnsafe?.user?.last_name;
+            userid.value = `${tg.initDataUnsafe.user.id}`;
+            // userid.value = tg.initDataUnsafe?.user?.last_name;
             console.log(userid.value);
         }
     }).catch((error) => {
