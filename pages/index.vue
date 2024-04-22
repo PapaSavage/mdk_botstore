@@ -354,7 +354,7 @@ onMounted(() => {
         const tg = (window as any).Telegram?.WebApp;
         console.log(tg);
 
-        tg.showAlert('Hello, World!' + tg.initDataUnsafe.user.first_name);
+        tg.showAlert('Hello, World!');
 
         if (tg) {
             userid.value = tg.initDataUnsafe.user.first_name;
