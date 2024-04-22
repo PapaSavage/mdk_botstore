@@ -358,8 +358,11 @@ onMounted(() => {
         console.log(tg);
 
         if (tg) {
-            tg.showAlert(`Добро пожаловать, @${tg.WebAppUser.username}.`);
-            userid.value = tg.initDataUnsafe.user.last_name; // Обновляем значение userid
+            const username = tg.WebAppUser?.username;
+            if (username) {
+                tg.showAlert(`Добро пожаловать, @${username}.`);
+            }
+            userid.value = tg.initDataUnsafe?.user?.last_name;
             console.log(userid.value);
         }
     }).catch((error) => {
