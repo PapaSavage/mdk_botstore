@@ -356,9 +356,9 @@ onMounted(() => {
     scriptLoaded.then(() => {
         const tg = (window as any).Telegram?.WebApp;
         console.log(tg);
-        tg.showAlert(`Добро пожаловать, @${tg.WebAppUser.username}.`);
 
         if (tg) {
+            tg.showAlert(`Добро пожаловать, @${tg.WebAppUser.username}.`);
             userid.value = tg.WebAppUser.username; // Обновляем значение userid
             console.log(userid.value);
         }
