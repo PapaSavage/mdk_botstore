@@ -167,7 +167,8 @@
                                 </div>
                                 <div class="mb-4 flex flex-row gap-3">
                                     <div>
-                                        <label for="" class="block text-sm font-medium text-gray-700">{{ userid }}</label>
+                                        <label for="" class="block text-sm font-medium text-gray-700">{{ userid
+                                            }}</label>
                                         <input type="text" id="" placeholder="example@example.com"
                                             v-model="customer_order.customer_email"
                                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"
@@ -336,25 +337,23 @@ definePageMeta({
 
 
 useHead({
-    title: "Store", script: [
-        {
-            src: 'https://telegram.org/js/telegram-web-app.js',
-            defer: true
-        }
-    ]
+    title: "Store"
 });
 const userid = ref('');
-const script = document.createElement('script');
-script.src = 'https://telegram.org/js/telegram-web-app.js';
-script.async = true;
-document.body.appendChild(script);
+onMounted(() => {
+    const script = document.createElement('script');
+    script.src = 'https://telegram.org/js/telegram-web-app.js';
+    script.async = true;
+    document.body.appendChild(script);
 
-const tg = (window as any).Telegram?.WebApp;
+    const tg = (window as any).Telegram?.WebApp;
+
+    if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id) {
+        userid.value = tg.initDataUnsafe.user.id; // Update the value of userid's Ref<string>
+    }
+})
 
 
-if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id) {
-    userid.value = tg.initDataUnsafe.user.id; // Update the value of userid's Ref<string>
-}
 
 interface Product_modal {
     id: number;
