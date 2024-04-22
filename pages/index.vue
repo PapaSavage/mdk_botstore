@@ -335,10 +335,42 @@ definePageMeta({
     layout: "default",
 });
 
+// useHead({
+//     title: "Store"
+// });
+// const userid = ref('');
+// onMounted(() => {
+//     const script = document.createElement('script');
+//     script.src = 'https://telegram.org/js/telegram-web-app.js';
+//     script.async = false;
+
+//     const scriptLoaded = new Promise((resolve, reject) => {
+//         script.onload = resolve;
+//         script.onerror = reject;
+//     });
+//     document.body.appendChild(script);
+
+//     scriptLoaded.then(() => {
+//         const tg = (window as any).Telegram?.WebApp;
+//         console.log(tg);
+
+//         tg.showAlert('Hello, World!' + tg.initData());
+
+//         if (tg) {
+//             userid.value = tg.initDataUnsafe.user.first_name;
+//             console.log(userid.value);
+//         }
+//     }).catch((error) => {
+//         console.error('Ошибка загрузки скрипта Telegram:', error);
+//     });
+// })
+
 useHead({
     title: "Store"
 });
-const userid = ref('');
+
+const userId = ref(''); // Создаем реактивную переменную для отображения user_id
+
 onMounted(() => {
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-web-app.js';
@@ -352,13 +384,10 @@ onMounted(() => {
 
     scriptLoaded.then(() => {
         const tg = (window as any).Telegram?.WebApp;
-        console.log(tg);
-
-        tg.showAlert('Hello, World!' + tg.initData());
 
         if (tg) {
-            userid.value = tg.initDataUnsafe.user.first_name;
-            console.log(userid.value);
+            userId.value = tg.initDataUnsafe.user.id; // Получаем user_id и присваиваем его userId.value
+            console.log("User ID:", userId.value);
         }
     }).catch((error) => {
         console.error('Ошибка загрузки скрипта Telegram:', error);
