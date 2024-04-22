@@ -356,10 +356,11 @@ onMounted(() => {
         const tg = (window as any).Telegram?.WebApp;
         console.log(tg);
 
-        tg.showAlert('Hello, World!' + tg.initData());
+        
 
         if (tg) {
-            userid.value = tg.initDataUnsafe.user.id; // Получаем user_id и присваиваем его userId.value
+            tg.showAlert('Hello, World!');
+            userid.value = tg.initDataUnsafe().user.id; // Получаем user_id и присваиваем его userId.value
             console.log("User ID:", userid.value);
         }
     }).catch((error) => {
