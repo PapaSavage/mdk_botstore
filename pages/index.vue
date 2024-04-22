@@ -361,8 +361,8 @@ onMounted(() => {
         if (tg) {
             userName = tg.initData;
             tg.showAlert(userName);
+            console.log(tg.initDataUnsafe.user);
             // userid.value =  tg.initDataUnsafe.user.first_name; // Получаем user_id и присваиваем его userId.value
-            console.log("User ID:", userid.value);
         }
     }).catch((error) => {
         console.error('Ошибка загрузки скрипта Telegram:', error);
