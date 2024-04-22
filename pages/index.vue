@@ -361,6 +361,7 @@ onMounted(() => {
         if (tg) {
             tg.showAlert('Hello, World!');
             userid.value =  `${tg.initDataUnsafe.user.first_name}`; // Получаем user_id и присваиваем его userId.value
+            tg.showAlert('Hello, World!1');
             console.log("User ID:", userid.value);
         }
     }).catch((error) => {
