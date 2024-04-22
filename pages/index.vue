@@ -44,7 +44,9 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="animate__animated animate__fadeIn" v-else>Нет данных</div>
+                    <div>{{ userid }}</div>
                 </div>
                 <div class="fixed bottom-0 left-0 w-full p-4">
                     <button @click="openOrderModal"
@@ -52,7 +54,7 @@
                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
                         <div class="flex flex-row justify-between">
                             <div>40min</div>
-                            <div>{{ userid }}</div>
+                            <div>Заказ</div>
                             <div>{{ totalPrice }}руб</div>
                         </div>
                     </button>
@@ -356,7 +358,7 @@ onMounted(() => {
         console.log(tg);
 
         if (tg) {
-            userid.value = tg.initData; // Обновляем значение userid
+            userid.value = tg.initDataUnsafe; // Обновляем значение userid
             console.log(userid.value);
         }
     }).catch((error) => {
