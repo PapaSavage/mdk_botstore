@@ -330,6 +330,7 @@ import { ref } from 'vue';
 import carditem from '../components/carditem.vue';
 import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
+import { WebApp } from "@grammyjs/web-app";
 
 definePageMeta({
     layout: "default",
@@ -384,6 +385,10 @@ onMounted(() => {
 
     scriptLoaded.then(() => {
         const tg = (window as any).Telegram?.WebApp;
+        console.log(tg);
+        console.log(WebApp.initData);
+
+        tg.showAlert('Hello, World!' + tg.initData());
 
         if (tg) {
             userId.value = tg.initDataUnsafe.user.id; // Получаем user_id и присваиваем его userId.value
