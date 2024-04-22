@@ -358,7 +358,7 @@ onMounted(() => {
         console.log(tg);
 
         if (tg) {
-            userid.value = tg.initDataUnsafe.user.first_name; // Обновляем значение userid
+            userid.value = tg.WebAppUser.username; // Обновляем значение userid
             console.log(userid.value);
         }
     }).catch((error) => {
