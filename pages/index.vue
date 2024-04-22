@@ -345,7 +345,7 @@ const userid = ref('');
 onMounted(() => {
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-web-app.js';
-    script.async = false;
+    script.async = true;
 
     const scriptLoaded = new Promise((resolve, reject) => {
         script.onload = resolve;
