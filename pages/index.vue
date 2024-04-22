@@ -52,7 +52,7 @@
                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
                         <div class="flex flex-row justify-between">
                             <div>40min</div>
-                            <div>Заказ</div>
+                            <div>{{ userid }}</div>
                             <div>{{ totalPrice }}руб</div>
                         </div>
                     </button>
@@ -167,8 +167,8 @@
                                 </div>
                                 <div class="mb-4 flex flex-row gap-3">
                                     <div>
-                                        <label for="" class="block text-sm font-medium text-gray-700">{{ userid
-                                            }}</label>
+                                        <label for="" class="block text-sm font-medium text-gray-700">Электронная
+                                            почта</label>
                                         <input type="text" id="" placeholder="example@example.com"
                                             v-model="customer_order.customer_email"
                                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"
@@ -343,14 +343,25 @@ const userid = ref('');
 onMounted(() => {
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-web-app.js';
-    script.async = true;
+    script.async = false;
+
+    const scriptLoaded = new Promise((resolve, reject) => {
+        script.onload = resolve;
+        script.onerror = reject;
+    });
     document.body.appendChild(script);
 
-    const tg = (window as any).Telegram?.WebApp;
+    scriptLoaded.then(() => {
+        const tg = (window as any).Telegram?.WebApp;
+        console.log(tg);
 
-    if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id) {
-        userid.value = tg.initDataUnsafe.user.id; // Update the value of userid's Ref<string>
-    }
+        if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id) {
+            userid.value = tg.initDataUnsafe.user.id; // Обновляем значение userid
+            console.log(userid.value);
+        }
+    }).catch((error) => {
+        console.error('Ошибка загрузки скрипта Telegram:', error);
+    });
 })
 
 
