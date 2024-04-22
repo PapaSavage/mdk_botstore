@@ -331,22 +331,6 @@ import carditem from '../components/carditem.vue';
 import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
 
-interface TelegramWindow extends Window {
-    Telegram?: {
-        WebApp?: {
-            initDataUnsafe: {
-                user: {
-                    first_name: string;
-                    // Другие свойства пользователя, если есть
-                };
-                // Другие данные, если есть
-            };
-            // Другие свойства или методы объекта WebApp, если есть
-        };
-        // Другие свойства или методы объекта Telegram, если есть
-    };
-}
-
 definePageMeta({
     layout: "default",
 });
@@ -360,8 +344,6 @@ onMounted(() => {
     script.src = 'https://telegram.org/js/telegram-web-app.js';
     script.async = false;
 
-    const telegramWindow = window as TelegramWindow;
-
     const scriptLoaded = new Promise((resolve, reject) => {
         script.onload = resolve;
         script.onerror = reject;
@@ -369,8 +351,10 @@ onMounted(() => {
     document.body.appendChild(script);
 
     scriptLoaded.then(() => {
-        const tg = telegramWindow.Telegram?.WebApp;
+        const tg = (window as any).Telegram?.WebApp;
         console.log(tg);
+
+        tg.showAlert('Hello, World!');
 
         if (tg) {
             userid.value = tg.initDataUnsafe.user.first_name;
