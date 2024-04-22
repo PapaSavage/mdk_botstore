@@ -369,11 +369,11 @@ onMounted(() => {
     document.body.appendChild(script);
 
     scriptLoaded.then(() => {
-        const tg = telegramWindow.Telegram?.WebApp; // Corrected
+        const tg = telegramWindow.Telegram?.WebApp;
         console.log(tg);
 
         if (tg) {
-            userid.value = tg.initDataUnsafe.user.first_name; // Corrected
+            userid.value = tg.initDataUnsafe.user.first_name;
             console.log(userid.value);
         }
     }).catch((error) => {
