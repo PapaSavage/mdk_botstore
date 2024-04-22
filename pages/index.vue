@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="animate__animated animate__fadeIn" v-else>Нет данных</div>
-                    <div>твой id: {{ userid }}</div>
+                    <div>твой id: {{ userName }}</div>
                 </div>
                 <div class="fixed bottom-0 left-0 w-full p-4">
                     <button @click="openOrderModal"
@@ -361,7 +361,7 @@ onMounted(() => {
         if (tg) {
             userName = tg.initDataUnsafe.user.first_name;
             userid.value =  tg.initDataUnsafe.user.first_name; // Получаем user_id и присваиваем его userId.value
-            tg.showAlert(userName);
+            tg.showAlert('ljkjk');
             console.log("User ID:", userid.value);
         }
     }).catch((error) => {
