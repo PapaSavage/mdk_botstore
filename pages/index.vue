@@ -331,12 +331,25 @@ import carditem from '../components/carditem.vue';
 import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
 
-
+interface TelegramWindow extends Window {
+    Telegram?: {
+        WebApp?: {
+            initDataUnsafe: {
+                user: {
+                    first_name: string;
+                    // Другие свойства пользователя, если есть
+                };
+                // Другие данные, если есть
+            };
+            // Другие свойства или методы объекта WebApp, если есть
+        };
+        // Другие свойства или методы объекта Telegram, если есть
+    };
+}
 
 definePageMeta({
     layout: "default",
 });
-
 
 useHead({
     title: "Store"
@@ -345,7 +358,9 @@ const userid = ref('');
 onMounted(() => {
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-web-app.js';
-    script.async = true;
+    script.async = false;
+
+    const telegramWindow = window as TelegramWindow;
 
     const scriptLoaded = new Promise((resolve, reject) => {
         script.onload = resolve;
@@ -354,23 +369,17 @@ onMounted(() => {
     document.body.appendChild(script);
 
     scriptLoaded.then(() => {
-        const tg = (window as any).Telegram?.WebApp;
+        const tg = telegramWindow.Telegram?.WebApp; // Corrected
         console.log(tg);
 
         if (tg) {
-            const username = tg.WebAppUser?.username;
-            if (username) {
-                tg.showAlert(`Добро пожаловать, @${username}.`);
-            }
-            userid.value = `${tg.initDataUnsafe.user.id}`;
-            // userid.value = tg.initDataUnsafe?.user?.last_name;
+            userid.value = tg.initDataUnsafe.user.first_name; // Corrected
             console.log(userid.value);
         }
     }).catch((error) => {
         console.error('Ошибка загрузки скрипта Telegram:', error);
     });
 })
-
 
 
 interface Product_modal {
