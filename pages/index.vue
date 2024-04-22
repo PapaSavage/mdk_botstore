@@ -209,7 +209,7 @@
                                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
                                         <div class="flex flex-row justify-between">
                                             <div>40min</div>
-                                            <div>Оформить заказ</div>
+                                            <div>{{ userid }}</div>
                                             <div>{{ totalPrice }}руб</div>
                                         </div>
                                     </button>
@@ -352,20 +352,7 @@ declare global {
 }
 
 
-// Check if running in a browser environment
-if (typeof window !== 'undefined') {
-    // Wait for DOMContentLoaded event
-    window.addEventListener('DOMContentLoaded', () => {
-        const tg = window.Telegram?.WebApp;
-        if (tg) {
-            console.log(tg.initDataUnsafe.user.id);
-        } else {
-            console.error('Telegram is not defined');
-        }
-    });
-} else {
-    console.error('This script requires a browser environment.');
-}
+
 
 
 interface Product_modal {
@@ -438,6 +425,23 @@ const idorder = ref(0);
 const isopenOrderModal = ref(false);
 const isopenOrderCreditionalsModal = ref(false);
 const isopenOrder = ref(false);
+const userid = ref('');
+
+// Check if running in a browser environment
+if (typeof window !== 'undefined') {
+    // Wait for DOMContentLoaded event
+    window.addEventListener('DOMContentLoaded', () => {
+        const tg = window.Telegram?.WebApp;
+        if (tg) {
+            userid.value = tg.initDataUnsafe.user.id;
+            console.log(tg.initDataUnsafe.user.id);
+        } else {
+            console.error('Telegram is not defined');
+        }
+    });
+} else {
+    console.error('This script requires a browser environment.');
+}
 
 const toast = useToast();
 
