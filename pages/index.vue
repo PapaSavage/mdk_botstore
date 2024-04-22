@@ -330,41 +330,10 @@ import { ref } from 'vue';
 import carditem from '../components/carditem.vue';
 import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
-import { WebApp } from "@grammyjs/web-app";
 
 definePageMeta({
     layout: "default",
 });
-
-// useHead({
-//     title: "Store"
-// });
-// const userid = ref('');
-// onMounted(() => {
-//     const script = document.createElement('script');
-//     script.src = 'https://telegram.org/js/telegram-web-app.js';
-//     script.async = false;
-
-//     const scriptLoaded = new Promise((resolve, reject) => {
-//         script.onload = resolve;
-//         script.onerror = reject;
-//     });
-//     document.body.appendChild(script);
-
-//     scriptLoaded.then(() => {
-//         const tg = (window as any).Telegram?.WebApp;
-//         console.log(tg);
-
-//         tg.showAlert('Hello, World!' + tg.initData());
-
-//         if (tg) {
-//             userid.value = tg.initDataUnsafe.user.first_name;
-//             console.log(userid.value);
-//         }
-//     }).catch((error) => {
-//         console.error('Ошибка загрузки скрипта Telegram:', error);
-//     });
-// })
 
 useHead({
     title: "Store"
@@ -386,7 +355,6 @@ onMounted(() => {
     scriptLoaded.then(() => {
         const tg = (window as any).Telegram?.WebApp;
         console.log(tg);
-        console.log(WebApp.initData);
 
         tg.showAlert('Hello, World!' + tg.initData());
 
