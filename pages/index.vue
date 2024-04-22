@@ -355,8 +355,8 @@ onMounted(() => {
         const tg = (window as any).Telegram?.WebApp;
         console.log(tg);
 
-        if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id) {
-            userid.value = tg.initDataUnsafe.user.id; // Обновляем значение userid
+        if (tg) {
+            userid.value = tg.initData; // Обновляем значение userid
             console.log(userid.value);
         }
     }).catch((error) => {
