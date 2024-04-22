@@ -340,7 +340,7 @@ useHead({
 });
 
 const userid = ref(''); // Создаем реактивную переменную для отображения user_id
-
+let userName = '';
 onMounted(() => {
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-web-app.js';
@@ -359,8 +359,9 @@ onMounted(() => {
         
 
         if (tg) {
+            userName = tg.initDataUnsafe.user.first_name;
             userid.value =  tg.initDataUnsafe.user.first_name; // Получаем user_id и присваиваем его userId.value
-            tg.showAlert(userid.value);
+            tg.showAlert(userName);
             console.log("User ID:", userid.value);
         }
     }).catch((error) => {
