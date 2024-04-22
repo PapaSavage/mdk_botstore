@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="animate__animated animate__fadeIn" v-else>Нет данных</div>
-                    <div>{{ userid }}</div>
+                    <div>твой id: {{ userid }}</div>
                 </div>
                 <div class="fixed bottom-0 left-0 w-full p-4">
                     <button @click="openOrderModal"
