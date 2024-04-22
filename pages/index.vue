@@ -370,7 +370,7 @@ useHead({
     title: "Store"
 });
 
-const userId = ref(''); // Создаем реактивную переменную для отображения user_id
+const userid = ref(''); // Создаем реактивную переменную для отображения user_id
 
 onMounted(() => {
     const script = document.createElement('script');
@@ -391,8 +391,8 @@ onMounted(() => {
         tg.showAlert('Hello, World!' + tg.initData());
 
         if (tg) {
-            userId.value = tg.initDataUnsafe.user.id; // Получаем user_id и присваиваем его userId.value
-            console.log("User ID:", userId.value);
+            userid.value = tg.initDataUnsafe.user.id; // Получаем user_id и присваиваем его userId.value
+            console.log("User ID:", userid.value);
         }
     }).catch((error) => {
         console.error('Ошибка загрузки скрипта Telegram:', error);
