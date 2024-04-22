@@ -330,6 +330,7 @@ import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
 
 
+
 definePageMeta({
     layout: "default",
 });
@@ -343,6 +344,29 @@ useHead({
         }
     ]
 });
+
+declare global {
+    interface Window {
+        Telegram: any; // Adjust the type as needed based on library usage
+    }
+}
+
+
+// Check if running in a browser environment
+if (typeof window !== 'undefined') {
+    // Wait for DOMContentLoaded event
+    window.addEventListener('DOMContentLoaded', () => {
+        const tg = window.Telegram?.WebApp;
+        if (tg) {
+            console.log(tg.initDataUnsafe.user.id);
+        } else {
+            console.error('Telegram is not defined');
+        }
+    });
+} else {
+    console.error('This script requires a browser environment.');
+}
+
 
 interface Product_modal {
     id: number;
