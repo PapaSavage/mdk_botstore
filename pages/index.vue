@@ -360,9 +360,9 @@ onMounted(() => {
 
         if (tg) {
             userName = tg.initData;
-            tg.showAlert('userName');
+            tg.showAlert('userName1');
             console.log(tg.initData);
-            console.log(tg.initDataUnsafe.user);
+            console.log(tg.initDataUnsafe.user.id);
             // userid.value =  tg.initDataUnsafe.user.first_name; // Получаем user_id и присваиваем его userId.value
         }
     }).catch((error) => {
