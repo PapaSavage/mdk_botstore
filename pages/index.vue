@@ -359,8 +359,8 @@ onMounted(() => {
         
 
         if (tg) {
-            tg.showAlert('Hello, World!' + tg.initDataUnsafe.user.username);
-            userid.value = tg.initDataUnsafe().user.username; // Получаем user_id и присваиваем его userId.value
+            tg.showAlert('Hello, World!');
+            userid.value = tg.initDataUnsafe.user.first_name; // Получаем user_id и присваиваем его userId.value
             console.log("User ID:", userid.value);
         }
     }).catch((error) => {
