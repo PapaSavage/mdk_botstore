@@ -362,7 +362,7 @@ onMounted(() => {
             userName = tg.initData;
             tg.showAlert('userName1');
             console.log(tg.initData);
-            console.log(tg.WebAppInitData.WebAppUser.user);
+            console.log(tg.initDataUnsafe.user.first_name);
             // userid.value =  tg.initDataUnsafe.user.first_name; // Получаем user_id и присваиваем его userId.value
         }
     }).catch((error) => {
