@@ -224,7 +224,7 @@
 
                     </div>
                 </div>
-                <div class="m-2 fixed z-50 inset-0 transition duration-200 animate__animated" :class="{
+                <div class="fixed z-50 inset-0 transition duration-200 animate__animated" :class="{
                 'animate__fadeInRight': isopenOrder, 'animate__fadeOutRight': isopenOrder !== true
             }">
                     <div class="relative bg-white rounded-lg h-full w-full mx-auto">
@@ -244,9 +244,9 @@
                         <div class="px-8 h-full overflow-y-auto">
                             <div class=" h-full overflow-y-auto">
                                 <div>Ваш заказ был оформлен.</div>
-                                <div class="text-center flex justify-center items-center h-full">Номер заказа {{
-                idorder }}</div>
-                                <div class="fixed bottom-0 left-0 w-full p-4">
+                                <div class="text-center flex justify-center items-center h-full">Номер заказа {{ idorder
+                                    }}</div>
+                                <!-- <div class="fixed bottom-0 left-0 w-full p-4">
                                     <button @click=""
                                         class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
                                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
@@ -256,7 +256,7 @@
                                             <div>{{ totalPrice }}руб</div>
                                         </div>
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
 
                         </div>
@@ -489,7 +489,8 @@ const createorder = async () => {
             });
             idorder.value = response.data;
             openOrder();
-            get_data();
+            // get_data();
+            clearCart();
         }
     ).catch((error) => {
         toast.add({
@@ -497,6 +498,7 @@ const createorder = async () => {
             timeout: 1000,
             callback: () => {
                 get_data();
+                clearCart();
             },
             color: "flamingo",
             ui: { background: "bg-white dark:bg-neutral-900" },
