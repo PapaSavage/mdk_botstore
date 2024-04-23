@@ -341,7 +341,7 @@ useHead({
 
 const userid = ref(''); // Создаем реактивную переменную для отображения user_id
 let userName = '';
-onMounted(() => {
+onMounted(async () => {
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-web-app.js';
     script.async = false;
@@ -352,22 +352,20 @@ onMounted(() => {
     });
     document.body.appendChild(script);
 
-    scriptLoaded.then(() => {
+    try {
+        await scriptLoaded;
+        // Telegram script has loaded, now you can execute the rest of the code
         const tg = (window as any).Telegram?.WebApp;
         console.log(tg);
 
+        userid.value = tg.initDataUnsafe.user?.id;
 
-
-        if (tg) {
-            userName = tg.initData;
-            tg.showAlert('userName1');
-            console.log(tg.initData);
-            console.log(tg.initDataUnsafe.user.first_name);
-            // userid.value =  tg.initDataUnsafe.user.first_name; // Получаем user_id и присваиваем его userId.value
-        }
-    }).catch((error) => {
+        console.log('User ID:', userid.value);
+        console.log(tg.initDataUnsafe.user?.id);
+        // ...
+    } catch (error) {
         console.error('Ошибка загрузки скрипта Telegram:', error);
-    });
+    }
 })
 
 
