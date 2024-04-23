@@ -104,7 +104,7 @@
                                     <button @click="openOrderCredetionalsModal"
                                         class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
                                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
-                                        <div class="flex flex-row justify-between">
+                                        <div class="flex flex-row justify-between text-sm">
                                             <div>40min</div>
                                             <div>Ввести личные данные</div>
                                             <div>{{ totalPrice }}руб</div>
