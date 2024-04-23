@@ -365,6 +365,7 @@ onMounted(async () => {
         console.log('User ID:', userid.value);
         console.log(tg.initDataUnsafe.user?.id);
         userName = (window as any).Telegram?.WebApp?.initDataUnsafe?.user?.first_name || '';
+        console.log('User Name:', userName);
     } catch (error) {
         console.error('Ошибка загрузки скрипта Telegram:', error);
     }
