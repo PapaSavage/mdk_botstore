@@ -46,7 +46,9 @@
                     </div>
 
                     <div class="animate__animated animate__fadeIn" v-else>Нет данных</div>
-                    <div>твой id: {{ userName }}</div>
+                    <client-only>
+                        <div>твой id: {{ userName }}</div>
+                    </client-only>
                 </div>
                 <div class="fixed bottom-0 left-0 w-full p-4">
                     <button @click="openOrderModal"
@@ -362,7 +364,7 @@ onMounted(async () => {
 
         console.log('User ID:', userid.value);
         console.log(tg.initDataUnsafe.user?.id);
-        // ...
+        userName = (window as any).Telegram?.WebApp?.initDataUnsafe?.user?.first_name || '';
     } catch (error) {
         console.error('Ошибка загрузки скрипта Telegram:', error);
     }
