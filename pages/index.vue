@@ -274,7 +274,7 @@
                         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <div class="sm:flex sm:items-center">
                                 <div class="mt-3 sm:mt-0 sm:w-1/2 flex justify-center items-center">
-                                    <img :src="'data:image/png;base64,' + selectedProduct.images" class="h-96" />
+                                    <img :src="'data:image/png;base64,' + selectedProduct.images" class="w-full" />
                                 </div>
                                 <div class="mt-3 sm:mt-0 sm:ml-6 sm:w-1/2">
                                     <div class="mb-4">
