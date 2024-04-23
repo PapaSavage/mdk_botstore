@@ -328,7 +328,7 @@
 <script setup lang="ts">
 import { API } from '~/plugins/axios.js';
 import { ref } from 'vue';
-import carditem from '../components/carditem.vue';
+import carditem from '../../components/carditem.vue';
 import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
 
@@ -339,10 +339,6 @@ definePageMeta({
 useHead({
     title: "Store"
 });
-
-const route = useRoute()
-
-console.log(route.params.id)
 
 interface Product_modal {
     id: number;
