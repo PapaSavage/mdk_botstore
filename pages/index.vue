@@ -209,7 +209,7 @@
                                 <div class="fixed bottom-0 left-0 w-full p-4">
                                     <button @click="createorder"
                                         class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
-                                        :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
+                                        :class="{ 'animate__fadeInUp': customer_order.customer_name && customer_order.customer_surname && customer_order.customer_lastname && customer_order.customer_phone && customer_order.customer_email && customer_order.order_address, 'animate__fadeOutDown': !customer_order.customer_name || !customer_order.customer_surname || !customer_order.customer_lastname || !customer_order.customer_phone || !customer_order.customer_email || !customer_order.order_address }">
                                         <div class="flex flex-row justify-between">
                                             <div>40min</div>
                                             <div>Оформить заказ</div>
@@ -239,11 +239,12 @@
                             </svg>
                         </button>
 
-                        <h3 class="text-center text-xl font-semibold mb-4 pt-4">Личные данные</h3>
+                        <h3 class="text-center text-xl font-semibold mb-4 pt-4">Заказ</h3>
 
                         <div class="px-8 h-full overflow-y-auto">
                             <div class=" h-full overflow-y-auto">
-                                <div class="text-center flex justify-center items-center h-full">Ваш номер заказа {{
+                                <div>Ваш заказ был оформлен.</div>
+                                <div class="text-center flex justify-center items-center h-full">Номер заказа {{
                 idorder }}</div>
                                 <div class="fixed bottom-0 left-0 w-full p-4">
                                     <button @click=""
