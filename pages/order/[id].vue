@@ -138,7 +138,7 @@
 
                         <div class="px-8 h-full overflow-y-auto">
                             <div class=" h-full overflow-y-auto">
-                                <div class="mb-3 flex flex-row gap-3">
+                                <div class="mb-4 flex flex-row gap-3">
                                     <div>
                                         <label for="" class="block text-sm font-medium text-gray-700">Фамилия</label>
                                         <input type="text" id="" placeholder="Иванов"
@@ -168,7 +168,7 @@
                                             required</div>
                                     </div>
                                 </div>
-                                <div class="mb-3 flex flex-row gap-3">
+                                <div class="mb-4 flex flex-row gap-3">
                                     <div>
                                         <label for="" class="block text-sm font-medium text-gray-700">Электронная
                                             почта</label>
@@ -189,7 +189,7 @@
                                             required</div>
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label for="" class="block text-sm font-medium text-gray-700">Адрес</label>
                                     <input type="text" id="" placeholder="ул. Пушкина 4"
                                         v-model="customer_order.order_address"
@@ -198,18 +198,18 @@
                                     <div v-if="!customer_order.order_address" class="text-red-500 text-xs p-1">
                                         required</div>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label for="" class="block text-sm font-medium text-gray-700">Комментарий</label>
                                     <textarea placeholder="Оставьте комментарий..." v-model="customer_order.description"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"></textarea>
                                 </div>
                                 <URadioGroup color="indigo" v-model="selected" legend="Выберите тип оплаты"
                                     :options="options" />
-                                <div class="py-12"></div>
+                                <div class="py-20"></div>
                                 <div class="fixed bottom-0 left-0 w-full p-4">
                                     <button @click="createorder"
                                         class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
-                                        :class="{ 'animate__fadeInUp': customer_order.customer_name && customer_order.customer_surname && customer_order.customer_lastname && customer_order.customer_phone && customer_order.customer_email && customer_order.order_address, 'animate__fadeOutDown': !customer_order.customer_name || !customer_order.customer_surname || !customer_order.customer_lastname || !customer_order.customer_phone || !customer_order.customer_email || !customer_order.order_address }">
+                                        :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
                                         <div class="flex flex-row justify-between">
                                             <div>40min</div>
                                             <div>Оформить заказ</div>
@@ -224,25 +224,28 @@
 
                     </div>
                 </div>
-                <div class="fixed z-50 inset-0 transition duration-200 animate__animated" :class="{
+                <div class="m-2 fixed z-50 inset-0 transition duration-200 animate__animated" :class="{
                 'animate__fadeInRight': isopenOrder, 'animate__fadeOutRight': isopenOrder !== true
             }">
                     <div class="relative bg-white rounded-lg h-full w-full mx-auto">
                         <!-- Здесь размещается содержимое вашего модального окна заказа -->
-                        <h3 class="text-center text-xl font-semibold mb-4 pt-4">Заказ №{{ idorder }}</h3>
+                        <button @click="isopenOrder = false"
+                            class="absolute top-0 left-0 p-5 text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
 
-                        <div class=" h-full overflow-y-auto">
+                        <h3 class="text-center text-xl font-semibold mb-4 pt-4">Личные данные</h3>
+
+                        <div class="px-8 h-full overflow-y-auto">
                             <div class=" h-full overflow-y-auto">
-
-                                <div class="text-center flex flex-col justify-center items-center h-full pb-20">
-                                    <img src="~/assets/img/posting.png"
-                                        class="sm:w-64 mx-auto w-52 backdrop-blur-sm animate__animated animate__swing"
-                                        alt="">
-                                    <div class="mt-4 font-bold">Ваш заказ был оформлен.</div>
-                                    <div>Номер заказа {{ idorder }}.</div>
-                                    <div>Ожидайте доставки.</div>
-                                </div>
-                                <!-- <div class="fixed bottom-0 left-0 w-full p-4">
+                                <div class="text-center flex justify-center items-center h-full">Ваш номер заказа {{
+                idorder }}</div>
+                                <div class="fixed bottom-0 left-0 w-full p-4">
                                     <button @click=""
                                         class="w-full py-3 px-6 bg-pale-sky-800 dark:bg-pale-sky-50 dark:text-black text-white font-semibold rounded-xl hover:bg-pale-sky-700 dark:hover:bg-pale-sky-600 transition duration-200 animate__animated shadow-md shadow-gray-400 dark:shadow-pale-sky-700 hover:shadow-lg"
                                         :class="{ 'animate__fadeInUp': cartItems.length > 0, 'animate__fadeOutDown': cartItems.length === 0 }">
@@ -252,7 +255,7 @@
                                             <div>{{ totalPrice }}руб</div>
                                         </div>
                                     </button>
-                                </div> -->
+                                </div>
                             </div>
 
                         </div>
@@ -325,7 +328,7 @@
 <script setup lang="ts">
 import { API } from '~/plugins/axios.js';
 import { ref } from 'vue';
-import carditem from '../components/carditem.vue';
+import carditem from '../../components/carditem.vue';
 import { useCartStore } from '~/stores/cart';
 import { storeToRefs } from 'pinia';
 
@@ -485,8 +488,7 @@ const createorder = async () => {
             });
             idorder.value = response.data;
             openOrder();
-            // get_data();
-            clearCart();
+            get_data();
         }
     ).catch((error) => {
         toast.add({
@@ -494,7 +496,6 @@ const createorder = async () => {
             timeout: 1000,
             callback: () => {
                 get_data();
-                clearCart();
             },
             color: "flamingo",
             ui: { background: "bg-white dark:bg-neutral-900" },
