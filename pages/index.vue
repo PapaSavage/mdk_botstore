@@ -342,8 +342,6 @@ useHead({
 
 const route = useRoute()
 
-console.log(route.params.id)
-
 interface Product_modal {
     id: number;
     title: string;
@@ -468,6 +466,7 @@ const createorder = async () => {
     }));
 
     const order = {
+        customer_id: route.params.id,
         customer_surname: customer_order.value.customer_surname,
         customer_name: customer_order.value.customer_name,
         customer_lastname: customer_order.value.customer_lastname,
