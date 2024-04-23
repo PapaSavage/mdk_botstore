@@ -138,7 +138,7 @@
 
                         <div class="px-8 h-full overflow-y-auto">
                             <div class=" h-full overflow-y-auto">
-                                <div class="mb-4 flex flex-row gap-3">
+                                <div class="mb-3 flex flex-row gap-3">
                                     <div>
                                         <label for="" class="block text-sm font-medium text-gray-700">Фамилия</label>
                                         <input type="text" id="" placeholder="Иванов"
@@ -168,7 +168,7 @@
                                             required</div>
                                     </div>
                                 </div>
-                                <div class="mb-4 flex flex-row gap-3">
+                                <div class="mb-3 flex flex-row gap-3">
                                     <div>
                                         <label for="" class="block text-sm font-medium text-gray-700">Электронная
                                             почта</label>
@@ -189,7 +189,7 @@
                                             required</div>
                                     </div>
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label for="" class="block text-sm font-medium text-gray-700">Адрес</label>
                                     <input type="text" id="" placeholder="ул. Пушкина 4"
                                         v-model="customer_order.order_address"
@@ -198,7 +198,7 @@
                                     <div v-if="!customer_order.order_address" class="text-red-500 text-xs p-1">
                                         required</div>
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label for="" class="block text-sm font-medium text-gray-700">Комментарий</label>
                                     <textarea placeholder="Оставьте комментарий..." v-model="customer_order.description"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-300 ease-in-out"></textarea>
