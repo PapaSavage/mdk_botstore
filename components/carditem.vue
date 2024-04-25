@@ -9,7 +9,7 @@ defineProps({
 
 <template>
 
-    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-100 lg:aspect-none hover:opacity-75">
+    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-100 hover:opacity-75">
         <img :src="imagesrc" class="" />
     </div>
     <div class="mt-4 flex justify-between">

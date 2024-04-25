@@ -24,7 +24,6 @@
                         <a href="" class="animate__animated animate__fadeIn" @click.prevent="openModal(product)">
                             <carditem :imagesrc="'data:image/png;base64,' + product.images" :title="product.title"
                                 :price="product.price" />
-
                         </a>
                         <div class="flex flex-row-reverse pt-1 animate__animated animate__fadeIn">
                             <button v-if="!product.quantity" @click="product.quantity = 1; addToCart(product);"
@@ -64,7 +63,6 @@
                 <div class="m-2 fixed z-50 inset-0 transition duration-200 animate__animated"
                     :class="{ 'animate__fadeInUp': isopenOrderModal, 'animate__fadeOutDown': isopenOrderModal !== true }">
                     <div class="relative bg-white rounded-lg h-full w-full mx-auto">
-                        <!-- Здесь размещается содержимое вашего модального окна заказа -->
                         <button @click="isopenOrderModal = false"
                             class="absolute top-0 left-0 p-5 text-gray-500 hover:text-gray-700">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
